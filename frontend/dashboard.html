@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate="dashboard_title">Real-time Health Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body class="dashboard-page">
+    <header>
+        <div class="header-content">
+            <h1 class="project-title" data-translate="project_title">Health Guardian</h1>
+            <div class="language-selector">
+                <label for="language-select">Language:</label>
+                <select id="language-select">
+                    <option value="en">English</option>
+                    <option value="hi">हिंदी</option>
+                    <option value="mr">मराठी</option>
+                </select>
+            </div>
+            <div class="location-display">
+                <h2 id="current-city"></h2>
+                <div class="pollution-ticker">
+                    <p><strong data-translate="live_aqi_label">Live Air Quality (AQI):</strong> <span id="pollution-data"></span></p>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="tabs">
+            <nav class="tab-nav">
+                <button class="tab-link active" data-tab="map-tab" data-translate="tab_live_map">Live Map</button>
+                <button class="tab-link" data-tab="recommendations-tab" data-translate="tab_ai_recommendations">AI Recommendations</button>
+                <button class="tab-link" data-tab="analytics-tab" data-translate="tab_analytics">Analytics</button>
+                <button class="tab-link" data-tab="resources-tab" data-translate="tab_resources">Resource Directory</button>
+            </nav>
+
+            <div class="tab-content-area">
+                <div id="map-tab" class="tab-content active">
+                    <h2 data-translate="mumbai_heatmap_title">Mumbai Heatmap</h2>
+                    <p data-translate="map_placeholder_text">The interactive map placeholder. This area is ready for a mapping library like Leaflet.js.</p>
+                    <div id="heatmap-container" style="height: 500px;"></div>
+                </div>
+
+                <div id="recommendations-tab" class="tab-content">
+                    <div class="recommendations-header">
+                        <h2 data-translate="ai_recommendations_title">AI Recommendations</h2>
+                        <button id="refresh-recommendations" class="btn-refresh" title="Get new recommendations" data-translate-title="refresh_recommendations_title">&#x21bb;</button>
+                    </div>
+                    <p id="recommendations-text" data-translate="loading_text">Loading...</p>
+                </div>
+
+                <div id="analytics-tab" class="tab-content">
+                    <h2 data-translate="data_visualization_title">Data Visualization</h2>
+                    <p data-translate="charts_graphs_placeholder">Charts and graphs will be shown here.</p>
+                    <div class="chart-container">
+                        <h3 data-translate="aqi_trend_chart_title">AQI Trend</h3>
+                        <canvas id="aqiTrendChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3 data-translate="beds_available_chart_title">Beds Available</h3>
+                        <canvas id="bedsAvailableChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3 data-translate="wait_time_chart_title">Wait Times</h3>
+                        <canvas id="waitTimesChart"></canvas>
+                    </div>
+                </div>
+
+                <div id="resources-tab" class="tab-content">
+                    <h2 data-translate="resources_directory_title">Medical Resource Directory</h2>
+                    <div class="search-bar">
+                        <input type="text" id="resource-search-input" placeholder="Search for hospitals, clinics, pharmacies..." data-translate-placeholder="resource_search_placeholder">
+                        <button id="resource-search-button" data-translate="resource_search_button">Search</button>
+                    </div>
+                    <div id="resource-results"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/translations.js"></script>
+    <script src="js/dashboard.js"></script>
+
+    <!-- Chatbot Icon -->
+    <div id="chatbot-icon" class="chatbot-icon">
+        <span class="material-icons">chat</span>
+    </div>
+
+    <!-- Chatbot UI -->
+    <div id="chatbot-ui" class="chatbot-ui hidden">
+        <div class="chatbot-header">
+            <h3 data-translate="chatbot_header">AI Chatbot</h3>
+            <button id="chatbot-close" class="chatbot-close">&times;</button>
+        </div>
+        <div class="chatbot-messages" id="chatbot-messages"></div>
+        <div class="chatbot-input-area">
+            <input type="text" id="chatbot-input" placeholder="Type your message..." data-translate-placeholder="chatbot_input_placeholder">
+            <button id="chatbot-send" data-translate="chatbot_send_button">Send</button>
+        </div>
+    </div>
+</body>
+</html>
